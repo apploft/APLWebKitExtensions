@@ -4,6 +4,7 @@
 // MIT License · http://choosealicense.com/licenses/mit/
 
 import WebKit
+import os.log
 
 public extension WKWebView {
     
@@ -18,7 +19,7 @@ public extension WKWebView {
            let source = try? NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue) as String {
             return evaluateJavaScript(source, completionHandler: completionHandler)
         } else {
-            print("User script could not be executed from file '\(filename).\(String(describing: fileExtension))'")
+            os_log("User script could not be executed from file: '%@.%@'", type: .error, filename, fileExtension ?? "")
             let error = NSError(domain: "de.apploft", code: 1000, userInfo: nil)
             completionHandler?(nil, error)
         }
