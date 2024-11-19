@@ -95,7 +95,7 @@ public extension WKHTTPCookieStore {
     ///   - completion: a completion handler receiving all cookies matching
     ///     the specified filter criteria.
     func getAllCookies(domain: String? = nil, onlyUnexpiredCookies: Bool = true, completion: @escaping ([HTTPCookie]) -> Void) {
-        self.getAllCookies { allCookies in
+        self.getAllCookies({ allCookies in
             var filteredCookies = allCookies
 
             if let domain = domain {
@@ -109,7 +109,7 @@ public extension WKHTTPCookieStore {
             }
 
             completion(filteredCookies)
-        }
+        })
     }
 
     private func unexpiredCookiesFrom(_ cookies: [HTTPCookie]) -> [HTTPCookie] {
